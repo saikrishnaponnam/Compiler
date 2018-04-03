@@ -1,0 +1,78 @@
+%{
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <string.h>
+	#include <ctype.h>
+	#include "labels.c"
+	FILE *yyin,*output;
+	int pass,num;
+%}
+
+
+%%
+
+
+[L]([0-9])+			{if(pass==2) {num=findline(yytext+1);fprintf(output,"%d",entry[num].ladrs);}}
+
+[L]([0-9])+[' ']*[:][\n]  {
+							if (pass==1)
+							{	
+								int num=findline(yytext+1);
+								if(entry[num].ladrs!=-1)
+									{printf("improper Labeling %d\n",num);exit(1);}
+								entry[num].ladrs=(linecnt*2)+2048-8;
+								//printf("%s line=%d %d %d\n",yytext,linecnt,num,entry[num].adrs );
+							}
+						}
+[\n]				{linecnt++; if(pass==2) fprintf(output,"\n");}
+(.)					{if(pass==2) fprintf(output,"%s",yytext);}
+
+
+[F]([0-9])+			{if(pass==2) {num=findline(yytext+1);fprintf(output,"%d",entry[num].fadrs);}}
+
+[F]([0-9])+[' ']*[:][\n]	{	
+								if(pass==1)
+								{
+									int num=findline(yytext+1);
+									if(entry[num].fadrs!=-1)
+										{printf("Same label for 2 functions %d\n",num);exit(1);}
+									entry[num].fadrs=(linecnt*2)+2048-8;
+								}
+							}
+
+
+
+
+
+
+
+%%
+
+
+int yywrap()
+{
+	if(pass==1)
+	{
+		yyin=fopen("intermediate.xsm","r");
+		pass=2;
+		return 0;
+	}
+	return 1;
+}
+
+int main()
+{
+	FILE *fp=fopen("intermediate.xsm","r");
+	if(fp)
+		yyin=fp;
+	else
+		printf("Error opening input file\n");
+	output=fopen("output.xsm","w");
+	pass=1;
+	linecnt=0;
+	int i;
+	for(i=0;i<100;i++)
+		entry[i].ladrs=-1,entry[i].fadrs=-1;
+	yylex();
+	return 1;
+}

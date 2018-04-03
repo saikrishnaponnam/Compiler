@@ -1,0 +1,54 @@
+class
+A 
+{
+  decl
+      int i;
+      int sum(int a,int b);
+  enddecl
+
+  int sum(int a,int b) {
+    begin
+        return a+b;
+    end;
+  }
+}
+B extends A
+{
+  decl
+     int sum(int a,int b,int c);      
+  enddecl
+
+  int sum(int a,int b,int c) {        
+        begin
+            return a+b+c;
+        end;
+  }
+}
+endclass
+
+decl
+  int n,x;
+  A obj;
+enddecl
+
+int main() {
+  decl
+  enddecl
+  begin
+      n=initialize();
+      read(n);
+      if(n>0) then 
+        obj = new(A);
+      else
+        obj = new(B);
+       endif;
+        
+        x = obj.sum(2,3);
+        write(x);
+        if(n<=0) then
+          x=obj.sum(2,3,5);
+          write(x);
+        endif;
+        return 1;
+  end;
+}

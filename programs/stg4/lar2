@@ -1,0 +1,16 @@
+decl
+	int a,b;
+	int *x;
+enddecl
+
+begin
+read(a);
+read(b);
+
+if(a>b) then
+	x=&a;
+else
+	x=&b;
+endif;
+	write(*x);
+end;

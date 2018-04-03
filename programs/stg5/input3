@@ -1,0 +1,14 @@
+decl 
+	int a,b,c,*p;
+enddecl
+
+begin
+	a=1;
+	b=2;
+	c=3;
+	p=&a;
+	write(p);
+	write(*p);
+	*p=5;
+	write(*p);
+end;

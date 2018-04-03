@@ -1,0 +1,26 @@
+decl
+  int init();
+enddecl
+
+int init()
+{
+  decl
+    int i;
+  enddecl
+  begin
+    i=1024;
+    while(i<2048) do
+      i=i+8;
+    endwhile;
+  end;
+}
+
+int main()
+{
+  decl
+    int temp;
+  enddecl
+  begin
+    temp=init();
+  end;
+}

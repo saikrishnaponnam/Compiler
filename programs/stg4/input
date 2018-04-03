@@ -1,0 +1,57 @@
+decl
+int a[10][10];
+int b[10][10];
+int c[10][10];
+int i,j,k,m,n,p,q;
+enddecl
+
+begin
+read(m);
+read(n);
+read(p);
+read(q);
+i=0;
+while(i<m) do
+ j=0;
+ while(j<n) do
+  read(a[i][j]);
+  j=j+1;
+ endwhile;
+ i=i+1;
+endwhile;
+
+i=0;
+while(i<p) do
+ j=0;
+ while(j<q) do
+  read(b[i][j]);
+  j=j+1;
+ endwhile;
+ i=i+1;
+endwhile;
+
+i=0;
+while(i<m) do
+ j=0;
+ while(j<p) do
+  k=0;
+  c[i][j]=0;
+  while(k<q) do
+   c[i][j]=c[i][j]+a[i][k]*b[k][j];
+   k=k+1;
+  endwhile;
+  j=j+1;
+ endwhile;
+ i=i+1;
+endwhile;
+
+i=0;
+while(i<p) do
+ j=0;
+ while(j<q) do
+  write(c[i][j]);
+  j=j+1;
+ endwhile;
+ i=i+1;
+endwhile;
+end;

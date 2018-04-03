@@ -1,0 +1,8 @@
+decl 
+	int a,b,c,*p;
+	str s,*x;
+enddecl
+
+begin
+	f=4;
+end;

@@ -1,0 +1,15 @@
+begin
+	a=0;
+	k=0;
+	while(a<10) do
+		write(a);
+		a=a+1;
+		while(k<5) do
+			write(k);
+			k=k+1;
+		endwhile;
+		if(a==7) then
+			break;
+		endif;
+	endwhile;
+end;
